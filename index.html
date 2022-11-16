@@ -8,25 +8,23 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <h3 id = time style="text-align:right;"></h3>
+    <h3 id = time style="text-align:right;">Timer: <span id="timer">60</span></h3>
     <div class="wrapper">
       <header>
         <h1>Pokemon Quiz</h1>
       </header>
       <div class="card">
-        <div class="card-header">
-          <h2></h2>
+        <div class="start-screen">
+          <h2> this is a game Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur reiciendis, cupiditate amet recusandae quaerat explicabo exercitationem eveniet! Praesentium ad molestias soluta excepturi possimus labore! Reiciendis eum dignissimos sint fugit?</h2>
+          <button id="start">start</button>
         </div>
-        <div class="card-body">
-          <ol class="choice-buttons">
-            <li><button id="answer1" class="btn"></button></li>
-            <li><button id="answer2" class="btn"></button></li>
-            <li><button id="answer3" class="btn"></button></li>
-            <li><button id="answer4" class="btn">Answer 4</button></li>
-          </ol>
+        <div class="question-screen hide">
+          <h2 id="question">something</h2>
+          <div id="choices"></div>
         </div>
-        <div class="card-footer">
-          
+        <div class="high-score-screen hide">
+          <label for="initials-input">Initials:</label><br>
+          <input type="text" id="initials-input" name="initials"><br>
         </div>
       </div>
     </div>

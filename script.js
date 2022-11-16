@@ -19,99 +19,93 @@
 // }
 
 
-var questionText = document.querySelector("h2");
-console.log(document.querySelector("h2"));
-var answerButtons = document.querySelector(".btn");
-var optionSelected = [];
-var correctAnswerSelection = [];
 var pokemonQuestions = [
-    {
-    question: "What is Ash's last name?",
-    options: ["Ketchup", "Mustard", "Caught em'", "Ketchum"],
-    correctAnswer: "Ketchum"
+  {
+  question: "What is Ash's last name?",
+  options: ["Ketchup", "Mustard", "Caught em'", "Ketchum"],
+  correctAnswer: "Ketchum"
 },
 {
-    question: "Which short, chubby rodent Pokemon is most often seen with ash?",
-    options: ["Picka-who?", "Pika-boo", "Pikachu", "Squirtle"],
-    correctAnswer: "Pikachu"
+  question: "Which short, chubby rodent Pokemon is most often seen with ash?",
+  options: ["Picka-who?", "Pika-boo", "Pikachu", "Squirtle"],
+  correctAnswer: "Pikachu"
 },
 {
-    question: "What is the name of the main antagonst duo? 'Team ___'",
-    options: ["Locket", "Sprocket", "Pocket", "Rocket"],
-    correctAnswer: "Rocket"
+  question: "What is the name of the main antagonst duo? 'Team ___'",
+  options: ["Locket", "Sprocket", "Pocket", "Rocket"],
+  correctAnswer: "Rocket"
 },
 {
-    question: "Which Pokemon is 'The First Movie' about?",
-    options: ["Mew-Two", "Charmander", "Lapras", "Eevee"],
-    correctAnswer: "Mew-Two"
+  question: "Which Pokemon is 'The First Movie' about?",
+  options: ["Mew-Two", "Charmander", "Lapras", "Eevee"],
+  correctAnswer: "Mew-Two"
 },
 {
-    question: "Which of the following is NOT a Pokemon?",
-    options: ["Bulbasaur", "Diglett", "Psyduck", "Psyd-Effect"],
-    correctAnswer: "Psyd-Effect"
+  question: "Which of the following is NOT a Pokemon?",
+  options: ["Bulbasaur", "Diglett", "Psyduck", "Psyd-Effect"],
+  correctAnswer: "Psyd-Effect"
 }
 ]
 
+// Selectors
+var startScreenEl = document.querySelector(".start-screen");
+var questionScreenEl = document.querySelector(".question-screen");
+var highScoreScreenEl = document.querySelector(".high-score-screen");
+var startBtnEl = document.querySelector("#start");
+var timerEl = document.querySelector("#timer");
+var questionsEl = document.querySelector("#question");
+var choicesBtnEl = document.querySelector("#choices");
 
 
-//  timer
+// Variables
+var time = 60;
+var intervalId;
+var index = 0;
+var currentQuestion;
+var firstQuestion = pokemonQuestions[0];
 
-var timeEl = document.querySelector("#time");
-var secondsLeft = 60;
 
-function setTime() {
-  var timerInterval = setInterval(function() {
-    secondsLeft--;
-    
-    if(secondsLeft === 0) {
-      clearInterval(timerInterval);
-      sendMessage();
-    }
-  }, 1000);
+startBtnEl.addEventListener("click", function(){
+startScreenEl.classList.add("hide");
+questionScreenEl.classList.remove("hide");
+questionDisplay();
+intervalId = setInterval(function(){
+  time--;
+  timerEl.textContent = time;
+
+  if (time <= 0) {
+    quit();
+  }
+}, 1000)
+})
+
+function questionDisplay() {
+questionsEl.textContent = firstQuestion.question;
+for (var i=0; i < firstQuestion.options.length; i++){
+  var choicesBtn = document.createElement("button");
+  choicesBtn.textContent = firstQuestion.options[i];
+  choicesBtnEl.appendChild(choicesBtn);
 }
-
-function setCounterText(){
-  timeEl.textContent = "Time Remaining: " + secondsLeft;
-}
-setCounterText()
-setTime()
-// for setting the buttons with the text for each possible option
-
-
-function setOptionText(){
-for (var i = 0; i < options.length; i++) {
-  var choiceButtons = document.querySelectorAll(".choice-buttons li")
-  console.log(document.querySelectorAll(".choice-buttons li"))
-  choiceButtons.textContent = options;
- }
-}
-setOptionText()
-
-// setting h2 to have the question present
-function setQuestionText(){
-  questionText.textContent = question;
-}
-setQuestionText()
-
-
-
-// setting the buttons to run through array
-var answerButtons = document.querySelector("pokemonQuestions");
-
-// Write password to the #password input
-function nextQuestion(pokemonQuestions) {
-  var i=0; i<pokemonQuestions ; i++ ;
-  questionText = question
-}
-// Add event listener to generate button
-answerButtons.addEventListener("click", nextQuestion)
-if (optionSelected === correctAnswer ){
-  nextQuestion()
-} 
-else {
-  nextQuestion()
-  seconds--;
 }
 
 
 
+
+choicesBtnEl.addEventListener("click",function(event){
+if (event.target.textContent === firstQuestion.correctAnswer) {
+  console.log("works")
+} else {
+  time = time-10;
+} quit()
+})
+
+
+
+
+
+function quit() {
+clearInterval(intervalId)
+questionScreenEl.classList.add("hide");
+highScoreScreenEl.classList.remove("hide");
+// hide questions screen and show score and take initials all goes into card-footer
+}
