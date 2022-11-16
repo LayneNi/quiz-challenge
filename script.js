@@ -12,11 +12,6 @@
 // THEN I can save my initials and my score
 // ```
 
-// var startPage = {
-//   question: "Would you like to start the quiz",
-//   options: [Start],
-//   correctAnswer: "Start"
-// }
 
 
 var pokemonQuestions = [
@@ -55,14 +50,15 @@ var startBtnEl = document.querySelector("#start");
 var timerEl = document.querySelector("#timer");
 var questionsEl = document.querySelector("#question");
 var choicesBtnEl = document.querySelector("#choices");
+var submitBtnEl = document.querySelector("#submit")
+// var replayBtnEl = document.querySelector("#replay")
 
 
 // Variables
 var time = 60;
 var intervalId;
 var index = 0;
-var currentQuestion;
-var firstQuestion = pokemonQuestions[0];
+var currentQuestion = pokemonQuestions[index];
 
 
 startBtnEl.addEventListener("click", function(){
@@ -80,24 +76,30 @@ intervalId = setInterval(function(){
 })
 
 function questionDisplay() {
-questionsEl.textContent = firstQuestion.question;
-for (var i=0; i < firstQuestion.options.length; i++){
+choicesBtnEl.innerHTML = ""
+questionsEl.textContent = pokemonQuestions[index].question;
+for (var i=0; i < pokemonQuestions[index].options.length; i++){
   var choicesBtn = document.createElement("button");
-  choicesBtn.textContent = firstQuestion.options[i];
+  choicesBtn.textContent = pokemonQuestions[index].options[i];
   choicesBtnEl.appendChild(choicesBtn);
 }
 }
 
-
-
-
 choicesBtnEl.addEventListener("click",function(event){
-if (event.target.textContent === firstQuestion.correctAnswer) {
+if (index === pokemonQuestions.length - 1){
+  quit();
+  return;
+}
+if (event.target.textContent === pokemonQuestions[index].correctAnswer) {
   console.log("works")
 } else {
   time = time-10;
-} quit()
-})
+  // quit()
+} 
+index++
+questionDisplay();
+console.log(index)
+}) 
 
 
 
@@ -107,5 +109,26 @@ function quit() {
 clearInterval(intervalId)
 questionScreenEl.classList.add("hide");
 highScoreScreenEl.classList.remove("hide");
-// hide questions screen and show score and take initials all goes into card-footer
+var submitBtn = document.createElement("button");
+submitBtn.textContent=("Submit");
+submitBtnEl.appendChild(submitBtn)
+// var replayBtn = document.createElement("button");
+// replayBtn.textContent=("Replay");
+// replayBtnEl.appendChild(replayBtn);
 }
+
+submitBtnEl.addEventListener("click",function(event){
+  highScoreScreenEl.classList.add("hide");
+  startScreenEl.classList.remove("hide");
+  questionScreenEl.classList.add("hide");
+})
+
+
+
+
+// replayBtnEl.addEventListener("click", function(){
+//   startScreenEl.classList.add("hide");
+//   questionScreenEl.classList.remove("hide");
+//   highScoreScreenEl.classList.add("hide");
+//   questionDisplay();
+// })
