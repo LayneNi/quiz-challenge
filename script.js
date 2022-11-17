@@ -50,7 +50,8 @@ var startBtnEl = document.querySelector("#start");
 var timerEl = document.querySelector("#timer");
 var questionsEl = document.querySelector("#question");
 var choicesBtnEl = document.querySelector("#choices");
-var submitBtnEl = document.querySelector("#submit")
+var submitBtnEl = document.querySelector("#submit");
+var initialsEl = document.querySelector("#initials-input");
 // var replayBtnEl = document.querySelector("#replay")
 
 
@@ -104,7 +105,6 @@ console.log(index)
 
 
 
-
 function quit() {
 clearInterval(intervalId)
 questionScreenEl.classList.add("hide");
@@ -118,9 +118,19 @@ submitBtnEl.appendChild(submitBtn)
 }
 
 submitBtnEl.addEventListener("click",function(event){
-  highScoreScreenEl.classList.add("hide");
-  startScreenEl.classList.remove("hide");
-  questionScreenEl.classList.add("hide");
+  var scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
+
+  var initials = initialsEl.value;
+  var newUser = {
+    initials,
+    time
+  }
+
+  scoreboard.push(newUser)
+  localStorage.setItem("scoreboard",JSON.stringify(scoreboard));
+
+  window.location.reload();
+
 })
 
 

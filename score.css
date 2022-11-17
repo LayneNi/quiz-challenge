@@ -1,0 +1,25 @@
+body{
+    background-color: red;
+}
+
+
+#scoreboard-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+#score-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+
+}
+
+.data{
+    display: inline-table;
+    font-size: 30px;
+
+}

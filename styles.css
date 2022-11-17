@@ -34,9 +34,16 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
+#scoreboard-link{
+  font-size: 30px;
+  margin-left: 50px;
+  display: inline-block;
+}
+
 #time{
   font-size: 30px;
   margin-right: 50px;
+  float: right;
 }
 
 .card {
@@ -124,26 +131,6 @@ button:active {
   float: right;
 }
 
-#password {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  display: block;
-  width: 100%;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 85px;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 2px dashed #c0c7cf;
-  border-radius: 6px;
-  resize: none;
-  overflow: hidden;
-}
 
 @media (max-width: 690px) {
   .btn {
