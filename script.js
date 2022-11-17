@@ -1,19 +1,4 @@
-// ```
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and my score
-// ```
-
-
-
+// my pokemonQuestions variable is an array of the different questions along with the possible answers and the correct answer for each
 var pokemonQuestions = [
   {
   question: "What is Ash's last name?",
@@ -61,7 +46,7 @@ var intervalId;
 var index = 0;
 var currentQuestion = pokemonQuestions[index];
 
-
+// this event listener is linked to the start button to begin the timer and begin cycling questions
 startBtnEl.addEventListener("click", function(){
 startScreenEl.classList.add("hide");
 questionScreenEl.classList.remove("hide");
@@ -76,6 +61,7 @@ intervalId = setInterval(function(){
 }, 1000)
 })
 
+// this function makes the questions and diferent answer buttons show on screen
 function questionDisplay() {
 choicesBtnEl.innerHTML = ""
 questionsEl.textContent = pokemonQuestions[index].question;
@@ -85,14 +71,15 @@ for (var i=0; i < pokemonQuestions[index].options.length; i++){
   choicesBtnEl.appendChild(choicesBtn);
 }
 }
-
+// this will bring you to the "initial input" screen when the quiz is out of questions
+// the second if statement makes it so that if you click the button with the value equal to that of the correct answer, you move on with no time penalty
+// the else statement makes it so if you get the question inccorect you are penalized 10 seconds off of your time
 choicesBtnEl.addEventListener("click",function(event){
 if (index === pokemonQuestions.length - 1){
   quit();
   return;
 }
 if (event.target.textContent === pokemonQuestions[index].correctAnswer) {
-  console.log("works")
 } else {
   time = time-10;
   // quit()
@@ -103,7 +90,7 @@ console.log(index)
 }) 
 
 
-
+// the quit function brings you to the final page for "initial input"
 
 function quit() {
 clearInterval(intervalId)
@@ -112,11 +99,9 @@ highScoreScreenEl.classList.remove("hide");
 var submitBtn = document.createElement("button");
 submitBtn.textContent=("Submit");
 submitBtnEl.appendChild(submitBtn)
-// var replayBtn = document.createElement("button");
-// replayBtn.textContent=("Replay");
-// replayBtnEl.appendChild(replayBtn);
-}
 
+}
+// the submit button will enter your initals and score into local storage and display any saved scores to the scoreboard page
 submitBtnEl.addEventListener("click",function(event){
   var scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
 
@@ -132,13 +117,3 @@ submitBtnEl.addEventListener("click",function(event){
   window.location.reload();
 
 })
-
-
-
-
-// replayBtnEl.addEventListener("click", function(){
-//   startScreenEl.classList.add("hide");
-//   questionScreenEl.classList.remove("hide");
-//   highScoreScreenEl.classList.add("hide");
-//   questionDisplay();
-// })
