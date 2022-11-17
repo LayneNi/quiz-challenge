@@ -10,6 +10,7 @@ Screenshot:
 
 ![Pokemon-Quiz-Screenshot](https://user-images.githubusercontent.com/116680523/202349234-f76ddd93-8869-4b19-a12f-9ba2c06eaaf8.png)
 
+Deployed Site:https://layneni.github.io/quiz-challenge/
 
 ## Credits
 
